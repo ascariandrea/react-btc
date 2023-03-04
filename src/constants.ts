@@ -1,0 +1,1 @@
+export const BLOCKCHAIN_INFO_WS = "wss://ws.blockchain.info/inv"
