@@ -17,9 +17,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "typeRoots": [
-      "../../node_modules/@types",
       "node_modules/@types",
-      "typings"
+    ],
+    "types": [
+      "./typings"
     ],
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
