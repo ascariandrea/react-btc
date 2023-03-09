@@ -48,3 +48,27 @@ yarn build
 ```
 
 After webpack has built the app you can serve the output with `yarn serve`.
+
+## Test
+
+Test are configured using [jest](https://jestjs.io/) and [ts-jest](https://kulshekhar.github.io/ts-jest/) to support TypeScript in test files.
+
+To render and interact with react components I used [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro) and I mocked all the requests performed by [axios](https://axios-http.com/) with [jest-mock-axios](https://github.com/knee-cola/jest-mock-axios).
+
+Run tests
+
+```sh
+yarn test
+```
+
+Run tests in watch mode
+
+```sh
+yarn test --watchAll
+```
+
+Run test with code coverage
+
+```sh
+yarn test --coverage
+```

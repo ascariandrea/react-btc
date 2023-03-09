@@ -1,4 +1,4 @@
-import { isAxiosError } from "axios";
+// import { isAxiosError } from "axios";
 
 export class AppError extends Error {
   constructor(
@@ -14,11 +14,12 @@ export class AppError extends Error {
 }
 
 export const toAppError = (e: unknown): AppError => {
-  if (isAxiosError(e)) {
+  const ee: any = e;
+  if (ee.isAxiosError === true) {
     return new AppError(
       "APIError",
-      e.message,
-      [e.response?.data, e.stack].filter((d) => d !== undefined)
+      ee.message,
+      [ee.response?.data, ee.stack].filter((d) => d !== undefined)
     );
   }
   if (e instanceof Error) {

@@ -23,7 +23,6 @@ export const useDoUpdateSearch = (
       let newItem: any = {};
       if (item !== null) {
         newItem = JSON.parse(item);
-        console.log("json item", newItem);
         const entry: number | undefined = newItem[p.q];
 
         newItem[p.q] = entry !== undefined ? entry + 1 : 1;

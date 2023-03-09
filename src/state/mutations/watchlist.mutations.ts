@@ -1,13 +1,21 @@
 import {
-  useMutation, type UseMutationOptions,
-  type UseMutationResult
+  useMutation,
+  type UseMutationOptions,
+  type UseMutationResult,
+  useQueryClient,
 } from "@tanstack/react-query";
-import { type AddToWatchListProps } from "../queries";
+import {
+  getWatchListAllQueryKey,
+  getWatchListNewQueryKey,
+  getWatchListQueryKey,
+  type AddToWatchListProps,
+} from "../queries";
 
 export const useDoAddToWatchList = <TError = unknown, TContext = unknown>(
   opts?: UseMutationOptions<undefined, TError, AddToWatchListProps, TContext>
-): UseMutationResult<undefined, TError, AddToWatchListProps, TContext> =>
-  useMutation<undefined, TError, AddToWatchListProps, TContext>(
+): UseMutationResult<undefined, TError, AddToWatchListProps, TContext> => {
+  const qc = useQueryClient();
+  return useMutation<undefined, TError, AddToWatchListProps, TContext>(
     ["toggle-watchlist-item"],
     async (p) => {
       const pKey = `${p.type}-${p.id}`;
@@ -22,6 +30,23 @@ export const useDoAddToWatchList = <TError = unknown, TContext = unknown>(
     },
     {
       ...opts,
-    }
+      onSuccess: async (data, { type, id }, ctx) => {
+        // invalidate current type id
+        await qc.invalidateQueries({
+          queryKey: getWatchListQueryKey({ type, id }),
+        });
+        // invalidate watch list for given type
+        await qc.invalidateQueries({
+          queryKey: getWatchListAllQueryKey(type),
+        });
 
+        // invalidate watch list new items
+        await qc.invalidateQueries({
+          queryKey: [getWatchListNewQueryKey()],
+        });
+
+        opts?.onSuccess?.(data, { type, id }, ctx);
+      },
+    }
   );
+};

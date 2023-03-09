@@ -18,7 +18,7 @@ export const WatchList: React.FC<{ type: AddToWatchListProps["type"] }> = ({
       <QueriesRenderer
         queries={{ watched: useWatchListAll(type) }}
         render={({ watched }) => {
-          return (
+          return watched.length > 0? (
             <List>
               {watched.map((w) => (
                 <ListItem key={w.id}>
@@ -26,7 +26,7 @@ export const WatchList: React.FC<{ type: AddToWatchListProps["type"] }> = ({
                 </ListItem>
               ))}
             </List>
-          );
+          ) : <Typography>No {type} on watch list</Typography>;
         }}
       />
     </Box>

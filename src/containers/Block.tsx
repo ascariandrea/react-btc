@@ -4,12 +4,12 @@ import {
   CardHeader
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { RawJSONAccordion } from 'components/RawJSONAccordion';
+import { RawJSONAccordion } from '../components/RawJSONAccordion';
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { InfoTable } from "../components/common/InfoTable";
 import QueriesRenderer from "../components/common/QueriesRenderer";
-import { useBTCBlock, useBTCLastBlock } from "../state/queries/block.queries";
+import { useBTCBlock, useBTCBlockCount } from "../state/queries/block.queries";
 
 interface BlockProps {
   block: number;
@@ -19,7 +19,7 @@ interface BlockProps {
 export const Block: React.FC<BlockProps> = ({ block, showTxs = false }) => {
   return (
     <QueriesRenderer
-      queries={{ block: useBTCBlock(block), lastBlock: useBTCLastBlock() }}
+      queries={{ block: useBTCBlock(block), lastBlock: useBTCBlockCount() }}
       render={({ block, lastBlock }) => {
         const confirmations = lastBlock - block.height + 1;
 

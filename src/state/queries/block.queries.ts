@@ -35,12 +35,12 @@ export const useBTCBlock = (
   );
 };
 
-const fetchBTCLastBlock: QueryFunction<number, string[]> = async () => {
+const fetchBTCBlockCount: QueryFunction<number, string[]> = async () => {
   return await pipe(getBlockCount(), foldTEorThrow);
 };
 
-export const useBTCLastBlock = (): UseQueryResult<number, AppError> => {
-  return useQuery([`btc-last-block`], fetchBTCLastBlock);
+export const useBTCBlockCount = (): UseQueryResult<number, AppError> => {
+  return useQuery([`btc-last-block-count`], fetchBTCBlockCount);
 };
 
 

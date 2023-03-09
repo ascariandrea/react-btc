@@ -16,7 +16,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "typeRoots": ["node_modules/@types"],
-    "types": ["./typings"],
+    "types": ["./typings", "jest"],
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
